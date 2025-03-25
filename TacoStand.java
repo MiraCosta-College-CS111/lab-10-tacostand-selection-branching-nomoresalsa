@@ -72,16 +72,17 @@ public class TacoStand
 	public static boolean orderSupplies(double budget)
 	{
 		//tacos cost 75 cents each in supplies, keeping it simple
-	    int tacosEach = (int)(Math.round(budget / 0.75 / 4));
-
-	    TacoStand.totalFunds -= budget;
-
-	    TacoStand.numAsada += tacosEach;
-	    TacoStand.numPollo += tacosEach;
-	    TacoStand.numLengua += tacosEach;
-	    TacoStand.numUltimate += tacosEach;
-
-		return true;  //TODO: this is stubbed, replace this line with your actual code!
+		if(budget <= totalFunds)
+		{
+			int tacosEach = (int)(Math.round(budget / 0.75 / 4));
+			TacoStand.totalFunds -= budget;	
+			TacoStand.numAsada += tacosEach;
+			TacoStand.numPollo += tacosEach;
+			TacoStand.numLengua += tacosEach;
+			TacoStand.numUltimate += tacosEach;		
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -93,7 +94,15 @@ public class TacoStand
 	 */
 	public static void updateTotalFunds(int tacoOption, int numTacos)
 	{
-		//TODO: this is stubbed, replace this line with your actual code!
+		double price = 0;
+		switch(tacoOption)
+		{
+			case 1: price = 2.50; numAsada -= numTacos; break;
+			case 2: price = 1.75; numPollo -= numTacos; break;
+			case 3: price = 3.00; numLengua -= numTacos; break;
+			case 4: price = 18.00; numUltimate -= numTacos; break;
+		}
+		totalFunds += price * numTacos;
 	}
 	
 	
@@ -107,6 +116,13 @@ public class TacoStand
 	 */
 	public static boolean areTacosAvailable(int tacoOption, int numTacos)
 	{
-		return false; //TODO: this is stubbed, replace this line with your actual code!
-	}
+        switch(tacoOption)
+        {
+            case 1: return numAsada >= numTacos;
+            case 2: return numPollo >= numTacos;
+            case 3: return numLengua >= numTacos;
+            case 4: return numUltimate >= numTacos;
+            default: return false;
+        }
+    }
 }

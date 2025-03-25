@@ -1,7 +1,9 @@
-// PARTNER NAME:
+
+
+// PARTNER NAME: Kasey Jones	
 // PARTNER NAME:
 // CS111 SECTION #:
-// DATE:
+// DATE: 03/25/2025
 
 public class Main
 {
@@ -59,26 +61,37 @@ public class Main
 	public static void takeOrder() //TODO: upgrade per documentation
 	{
 		//DECLARATION + INITIALIZATION SECTION
-		int option, numTacosOrdered;
-
-		//INPUT SECTION
 		TacoStand.printMenu();
+		int option, numTacosOrdered;
+		// INPUT SECTION
 		option = UtilityBelt.readInt("Enter choice> ", 1, 4);
-		numTacosOrdered = UtilityBelt.readInt("Enter number of tacos you want> ", 1, 50);
+		numTacosOrdered = UtilityBelt.readInt("Enter number of tacos you want> ",1,50);
 
-		//CALCULATION + OUTPUT SECTION
-		TacoStand.updateTotalFunds(option, numTacosOrdered);
-		Main.printConfirmation(numTacosOrdered);
+		if (TacoStand.areTacosAvailable(option, numTacosOrdered))
+		{
+			TacoStand.updateTotalFunds(option, numTacosOrdered);
+			Main.printConfirmation(numTacosOrdered);
+		}
+		else
+		{
+			System.out.println("We don't have that many tacos, sorry! Try again :(");
+		}
 	}
 
+	// 	//CALCULATION + OUTPUT SECTION
+	
+	
+	
+	
 	/**
 	 * Prints confirmation message that varies based on number of tacos in order
 	 * 
 	 * @param numTacos
 	 */
-	public static void printConfirmation(int numTacos) //TODO: upgrade per documentation
+	public static void printConfirmation(int numTacos)
 	{
 		System.out.println("Here you go, buen provecho!");
-		System.out.println("🌮");
+		for(int i = 0; i < numTacos; i++) System.out.print("🌮");
+		System.out.printf("%n%n");
 	}
 }
